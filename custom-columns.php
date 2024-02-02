@@ -30,6 +30,9 @@ class Custom_Columns {
 
         add_filter('manage_edit-post_sortable_columns', [$this, 'add_sortable_column']);
         add_filter('manage_edit-page_sortable_columns', [$this, 'add_sortable_column']);
+        
+        //add user sortable column
+        add_filter('manage_users_sortable_columns', [$this, 'user_sortable_column']);
 
         //posts view count column
         add_filter('manage_posts_columns', [$this, 'add_view_count_column']);
@@ -45,6 +48,11 @@ class Custom_Columns {
         add_filter('manage_users_columns', [$this, 'add_user_reg_column']);
         add_action('manage_users_custom_column', [$this, 'manage_user_reg_column'], 10, 3);
 
+    }
+
+    function user_sortable_column($columns) {
+        $columns['user_registered'] = 'user_registered';
+        return $columns;
     }
 
     function manage_user_reg_column($value, $column_name, $user_id) {
